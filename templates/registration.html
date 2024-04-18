@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .one{
+        border: 1px solid black;
+        padding: 10px;
+        background-color: aquamarine;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .two{
+        padding-bottom: 10px;
+        
+    }
+
+</style>
+<form action="{% url 'registration' %}" method="post">
+    {% csrf_token %}
+   
+<div class="one">
+    <h1>Registration</h1>
+    <hr>
+    <div class="two">
+        <input type="text" name="name" placeholder="Enter Name" required>
+    </div>
+    <div class="two">
+        <input type="email" name="email" placeholder="Enter Email" required>
+    </div>
+    <div class="two">
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="two">
+        <input type="password" name="repassword" placeholder="Confirm Password" required>
+    </div>
+    <div class="text-center">
+        <button type="submit">Register</button>
+    </div>
+</div>
+</form>
+{% endblock  %}

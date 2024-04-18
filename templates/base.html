@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <!-- ===== Boxicons CSS ===== -->
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <nav>
+        <div class="nav-bar">
+            <i class='bx bx-menu sidebarOpen' ></i>
+            <span class="logo navLogo"><a href="#">Navbar</a></span>
+
+            <div class="menu">
+                <div class="logo-toggle">
+                    <span class="logo"><a href="#">Navbar</a></span>
+                    <i class='bx bx-x siderbarClose'></i>
+                </div>
+
+                <ul class="nav-links">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'base' %}">Home</a></li>
+                    <li><a href="{% url 'predict' %}">Insurance Prediction</a></li>
+                    <li><a href="{% url 'log_out' %}">Logout</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    {% else %}
+                    <li><a href="{% url 'base' %}">Home</a></li>
+
+                    <li><a href="{% url 'log_in' %}">Signup/Login</a></li>
+                    
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="darkLight-searchBox">
+                <div class="dark-light">
+                    <i class='bx bx-moon moon'></i>
+                    <i class='bx bx-sun sun'></i>
+                </div>
+
+                <div class="searchBox">
+                   <div class="searchToggle">
+                    <i class='bx bx-x cancel'></i>
+                    <i class='bx bx-search search'></i>
+                   </div>
+
+                    <div class="search-field">
+                        <input type="text" placeholder="Search...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% for message in messages %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {% if message.tags == 'success' %}
+    <script>
+      var m = "{{ message }}"
+      swal(m, '', 'success');
+    </script>
+    {% elif message.tags == 'danger' %}
+    <script>
+      var m = "{{ message }}"
+      swal(m, '', 'error');
+    </script>
+    {% elif message.tags == 'info' %}
+    <script>
+      var m = "{{ message }}"
+      swal(m, '');
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% block content %}
+    
+    {% endblock  %}
+ <!--  JavaScript file -->
+ <script src="{% static "js/script.js" %}"></script>
+
+
+</body>
+</html>
